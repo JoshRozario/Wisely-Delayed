@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wisely Delayed Settings</title>
+    <link rel="stylesheet" href="./dist/tailwind.css">
+    <meta charset="UTF-8">
+</head>
+<body class="bg-editor-background text-text-main font-mono p-8 max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold text-accent mb-6">Wisely Delayed Settings</h1>
+    <form id="settings-form" class=" shadow-md rounded  pt-6 pb-8 mb-4">
+        <div class="mb-4">
+            <label for="site" class="block text-pacific-cyan text-lg font-bold mb-2">
+                Site URL:
+            </label>
+            <input type="text" id="site" placeholder="https://www.example.com or the extension page currently in your address bar" required
+                   class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="mb-4">
+            <label for="delay" class="block text-pacific-cyan text-lg font-bold mb-2">
+                Delay (in seconds):
+            </label>
+            <input type="number" id="delay" min="5" required
+                   class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main mb-3 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="mb-6">
+            <label for="unblockTime" class="block text-pacific-cyan text-lg font-bold mb-2">
+                Unlock time (in minutes):
+            </label>
+            <input type="number" id="unblockTime" min="1" required
+                   class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <button type="submit" class="bg-blue-green hover:bg-honolulu-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Add or Update Delay
+        </button>
+    </form>
+    <form id="self-message-form" class=" shadow-md rounded  pt-6 pb-8 mb-4">
+        <div class="mb-4">
+            <label for="message" class="block text-pacific-cyan text-lg font-bold mb-2">
+                Message:
+            </label>
+            <input type="text" id="self-message" placeholder="Would the person I want to be do this?" required
+                   class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <button type="submit" class="bg-blue-green hover:bg-honolulu-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Set or Update Message
+        </button>
+    </form>
+    <form id="wisdom-site-form" class=" shadow-md rounded  pt-6 pb-8 mb-4">
+        <div class="mb-4">
+            <label for="wisdom-site" class="block text-pacific-cyan text-lg font-bold mb-2">
+                Button Redirect Site:
+            </label>
+            <input type="text" id="wisdom-site" placeholder="www.google.com" required
+                   class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <button type="submit" class="bg-blue-green hover:bg-honolulu-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Set or Update Redirect Site
+        </button>
+    </form>
+    <h2 class="text-2xl font-semibold text-light-blue mb-4">Current Delayed Sites</h2>
+    <div id="delayed-sites-list" class="pt-6 pb-8 mb-4">
+        <!-- List of delayed sites will go here -->
+    </div>
+
+    <h2 class="text-2xl font-semibold text-light-blue mb-4">Current Unblocked Sites</h2>
+    <div id="unblocked-sites-list" class="pt-6 pb-8">
+        <!-- List of unblocked sites will go here -->
+    </div>
+    <script type="module" src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wisely Delayed</title>
+    <link rel="stylesheet" href="./dist/tailwind.css">
+</head>
+<body class="bg-editor-background text-text-main font-mono h-screen overflow-hidden">
+
+    <!-- Main container -->
+    <div class="flex flex-col mt-16 items-center p-6">
+        <!-- Message -->
+        <h1 id="message" class="text-5xl font-bold text-accent mb-6">
+            Would the person I want to be, do this?
+        </h1>
+
+        <!-- Countdown timer -->
+        <div class="flex flex-col items-center mb-8">
+            <div class="text-7xl text-accent" id="seconds">27</div>
+            <div class="text-secondary-accent uppercase tracking-widest">Seconds</div>
+        </div>
+    </div>
+
+    <div class="flex flex-col mt-16 justify-end items-center p-6">
+        <!-- Site title -->
+        <h2 class=" text-4xl font-semibold text-vivid-sky-blue mb-4">
+            This site has been Wisely Delayed
+        </h2>
+
+        <!-- Action button -->
+        <button id="wisdom-site" class="bg-blue-green hover:bg-honolulu-blue text-white mt-6 font-bold py-2 px-8 rounded-full text-lg transition-colors duration-300 ease-in-out focus:outline-none focus:ring focus:border-blue-300">
+            I want to spend my time more wisely
+        </button>
+    </div>
+
+    <!-- Countdown script -->
+    <script type="module" src="countdown.js"></script>
+</body>
+</html>
