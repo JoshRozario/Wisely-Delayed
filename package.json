@@ -1,0 +1,10 @@
+{
+  "name": "wisely-delayed",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tailwindcss -i input.css -o dist/tailwind.css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.5"
+  }
+}

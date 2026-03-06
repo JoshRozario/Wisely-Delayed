@@ -7,8 +7,54 @@
     <meta charset="UTF-8">
 </head>
 
+<style>
+    .lock-card { background: rgb(3 28 48); border: 1px solid rgba(0, 180, 216, 0.15); border-radius: 8px; padding: 20px; margin-bottom: 32px; transition: border-color 0.2s; }
+    .lock-card.locked { border-color: rgba(0, 180, 216, 0.4); }
+    .toggle-switch { position: relative; display: inline-block; width: 44px; height: 24px; cursor: pointer; flex-shrink: 0; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-track { position: absolute; inset: 0; background: rgba(95, 126, 151, 0.35); border-radius: 12px; transition: background 0.2s; }
+    .toggle-track::before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: rgb(144, 224, 239); border-radius: 50%; transition: transform 0.2s; }
+    .toggle-switch input:checked + .toggle-track { background: rgb(0, 150, 199); }
+    .toggle-switch input:checked + .toggle-track::before { transform: translateX(20px); }
+    .lock-fields { max-height: 0; overflow: hidden; opacity: 0; margin-top: 0; border-top: 1px solid transparent; transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.3s ease, border-color 0.3s ease; }
+    .lock-fields.visible { max-height: 300px; opacity: 1; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(0, 180, 216, 0.1); }
+</style>
 <body class="bg-editor-background text-text-main font-mono p-8 max-w-3xl mx-auto">
     <h1 class="text-3xl font-bold text-accent mb-6">Wisely Delayed Settings</h1>
+
+    <!-- Settings page lock -->
+    <div id="settings-lock-card" class="lock-card">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center" style="gap: 20px;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="color: rgb(0,180,216); flex-shrink:0;">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <div>
+                    <div class="font-bold text-accent" style="font-size: 0.95rem;">Delay access to these settings</div>
+                    <div class="text-secondary-accent" style="font-size: 0.8rem; margin-top: 2px;">Require a countdown before this page can be opened</div>
+                </div>
+            </div>
+            <label class="toggle-switch" title="Enable settings lock">
+                <input type="checkbox" id="settings-lock-toggle">
+                <span class="toggle-track"></span>
+            </label>
+        </div>
+        <div id="settings-lock-fields" class="lock-fields">
+            <div class="flex gap-4">
+                <div style="flex: 1;">
+                    <label class="block text-pacific-cyan font-bold mb-2" style="font-size: 0.8rem;">Delay (seconds)</label>
+                    <input type="number" id="settings-lock-delay" min="5" value="30"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div style="flex: 1;">
+                    <label class="block text-pacific-cyan font-bold mb-2" style="font-size: 0.8rem;">Unlock time (minutes)</label>
+                    <input type="number" id="settings-lock-unblock" min="1" value="5"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+            </div>
+        </div>
+    </div>
     <form id="settings-form" class=" shadow-md rounded  pt-6 pb-8 mb-4">
         <div class="mb-4">
             <label for="site" class="block text-pacific-cyan text-lg font-bold mb-2 flex items-center gap-2">
@@ -75,6 +121,17 @@
             Set or Update Redirect Site
         </button>
     </form>
+    <h2 class="text-2xl font-semibold text-light-blue mb-4">Backup &amp; Restore</h2>
+    <div class="flex mb-8" style="gap: 16px;">
+        <button id="export-btn" class="bg-blue-green hover:bg-honolulu-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Export Settings
+        </button>
+        <label class="bg-blue-green hover:bg-honolulu-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">
+            Import Settings
+            <input type="file" id="import-input" accept=".json" class="hidden">
+        </label>
+    </div>
+
     <h2 class="text-2xl font-semibold text-light-blue mb-4">Current Delayed Sites</h2>
     <div id="delayed-sites-list" class="pt-6 pb-8 mb-4">
         <!-- List of delayed sites will go here -->

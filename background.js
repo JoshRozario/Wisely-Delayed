@@ -47,7 +47,7 @@ function handleDelay(tabId, url, delayTime, matchedKey) {
 
     if (endTime == null || endTime < Date.now()) {
       browser.storage.sync.set({ pendingDelay: { site: url, delay: delayTime, key: timingKey } }, () => {
-        browser.tabs.update(tabId, { url: browser.extension.getURL('countdown.html') });
+        browser.tabs.update(tabId, { url: browser.runtime.getURL('countdown.html') });
       });
     } else {
       // still unlocked
@@ -63,7 +63,7 @@ function checkCurrentTab() {
 setInterval(checkCurrentTab, 500);
 
 browser.browserAction.onClicked.addListener(function () {
-  browser.tabs.create({ 'url': browser.extension.getURL('options.html') }, function (tab) {
+  browser.tabs.create({ 'url': browser.runtime.getURL('options.html') }, function (tab) {
     // Tab opened.
   });
 });
