@@ -2,7 +2,7 @@
 
 Firefox extension that reduces wasted time on distracting sites by using the power of friction.
 
-Instead of blocking sites outright, Wisely Delayed forces a countdown before you can access them — giving you a moment to reconsider.
+Instead of blocking sites outright, Wisely Delayed forces a countdown before you can access them, giving you a moment to reconsider.
 
 ## Features
 
