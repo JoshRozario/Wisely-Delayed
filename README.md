@@ -1,22 +1,30 @@
-# Wisely Delayed - Build Instructions
+# Wisely Delayed
 
-## Requirements
+Firefox extension that reduces wasted time on distracting sites by using the power of friction.
 
-- Node.js v18 or later (https://nodejs.org)
-- npm (included with Node.js)
+Instead of blocking sites outright, Wisely Delayed forces a countdown before you can access them — giving you a moment to reconsider.
 
-## Build Steps
+## Features
 
-1. Install dependencies:
-   ```
-   npm install
-   ```
+- Configurable delay per site (seconds) and unlock duration (minutes)
+- Wildcard support (`*.youtube.com` blocks all subdomains)
+- Self-lock the settings page to prevent impulsive changes
+- Custom motivational message on the countdown screen
+- Redirect button to a productive site of your choice
+- Import/export settings for backup and restore
+- Countdown pauses when you leave the tab
 
-2. Build the CSS:
-   ```
-   npm run build
-   ```
+## Install
 
-This generates `dist/tailwind.css` from `input.css` using the configuration in `tailwind.config.js`.
+[Get it on Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/wisely-delayed/)
 
-The remaining files (`manifest.json`, `background.js`, `utils.js`, `countdown.js`, `countdown.html`, `options.html`, `options.js`) are plain JavaScript/HTML and require no build step.
+## Build
+
+Requires Node.js 18+.
+
+```
+npm install
+npm run build
+```
+
+This generates `dist/tailwind.css` from `input.css`. All other files are plain JS/HTML.
