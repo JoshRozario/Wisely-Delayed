@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Wisely Delayed Settings</title>
     <link rel="stylesheet" href="./dist/tailwind.css">
     <meta charset="UTF-8">
 </head>
+
 <body class="bg-editor-background text-text-main font-mono p-8 max-w-3xl mx-auto">
     <h1 class="text-3xl font-bold text-accent mb-6">Wisely Delayed Settings</h1>
     <form id="settings-form" class=" shadow-md rounded  pt-6 pb-8 mb-4">
         <div class="mb-4">
-            <label for="site" class="block text-pacific-cyan text-lg font-bold mb-2">
+            <label for="site" class="block text-pacific-cyan text-lg font-bold mb-2 flex items-center gap-2">
                 Site URL:
+                <span class="info-icon">
+                    &#9432; <!-- simple "i" in circle -->
+                    <span class="tooltip">
+                        <p>Accepted formats:</p>
+                        <ul>
+                            <li><code>https://www.example.com</code> – exact site</li>
+                            <li><code>example.com</code> → normalized to <code>www.example.com</code></li>
+                            <li><code>*.example.com</code> – any subdomain of example.com</li>
+                            <li><code>moz-extension://</code>, <code>chrome://extensions</code>  – extension pages</li>
+                        </ul>
+                    </span>
+                </span>
             </label>
-            <input type="text" id="site" placeholder="https://www.example.com or the extension page currently in your address bar" required
-                   class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
+            <input type="text" id="site"
+                placeholder="https://www.example.com or the extension page currently in your address bar" required
+                class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
         </div>
         <div class="mb-4">
             <label for="delay" class="block text-pacific-cyan text-lg font-bold mb-2">
                 Delay (in seconds):
             </label>
             <input type="number" id="delay" min="5" required
-                   class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main mb-3 leading-tight focus:outline-none focus:shadow-outline">
+                class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main mb-3 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         <div class="mb-6">
             <label for="unblockTime" class="block text-pacific-cyan text-lg font-bold mb-2">
                 Unlock time (in minutes):
             </label>
             <input type="number" id="unblockTime" min="1" required
-                   class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
+                class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
         </div>
-        <button type="submit" class="bg-blue-green hover:bg-honolulu-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <button type="submit"
+            class="bg-blue-green hover:bg-honolulu-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
             Add or Update Delay
         </button>
     </form>
@@ -39,9 +55,10 @@
                 Message:
             </label>
             <input type="text" id="self-message" placeholder="Would the person I want to be do this?" required
-                   class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
+                class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
         </div>
-        <button type="submit" class="bg-blue-green hover:bg-honolulu-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <button type="submit"
+            class="bg-blue-green hover:bg-honolulu-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
             Set or Update Message
         </button>
     </form>
@@ -51,9 +68,10 @@
                 Button Redirect Site:
             </label>
             <input type="text" id="wisdom-site" placeholder="www.google.com" required
-                   class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
+                class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-text-main leading-tight focus:outline-none focus:shadow-outline">
         </div>
-        <button type="submit" class="bg-blue-green hover:bg-honolulu-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <button type="submit"
+            class="bg-blue-green hover:bg-honolulu-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
             Set or Update Redirect Site
         </button>
     </form>
@@ -66,6 +84,8 @@
     <div id="unblocked-sites-list" class="pt-6 pb-8">
         <!-- List of unblocked sites will go here -->
     </div>
-    <script type="module" src="options.js"></script>
+    <script src="utils.js"></script>
+    <script src="options.js"></script>
 </body>
+
 </html>

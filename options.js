@@ -1,37 +1,6 @@
-function standardiseUrl(inputUrl) {
-    // Parse the input URL or prepend 'http://' if no protocol is present
-    if (!inputUrl.includes('://')) {
-        inputUrl = 'https://' + inputUrl;
-    }
-
-    let url;
-
-    try {
-        url = new URL(inputUrl);
-    } catch (e) {
-        // If the URL is not valid, return null or handle as needed
-        console.error("Invalid URL");
-        return null;
-    }
-
-    // Extracting protocol and checking if hostname contains a subdomain or 'www'
-    let protocol = url.protocol; // Keep the original protocol
-    let hostname = url.hostname;
-
-    // Check if the hostname is 'www.' or has a subdomain like 'app.'
-    if (!hostname.startsWith('www.') && !hostname.includes('.')) {
-        hostname = 'www.' + hostname; // prepend 'www.' only if it's a simple domain
-    }
-
-    // Standardizing the URL to the desired format
-    const standardizedUrl = `${protocol}//${hostname}`;
-
-    return standardizedUrl;
-}
-
-
 // Add a submit event listener to the form
 // Attach an event listener to the form's submit event
+
 document.getElementById('settings-form').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -42,13 +11,13 @@ document.getElementById('settings-form').addEventListener('submit', function (e)
 
     var siteValue = ""
 
-    if (checkExtensionPage(siteInput))
+    if (checkExtensionPage(siteInput.value))
     {
         siteValue = siteInput.value.trim()
     }
     else{
         siteValue = standardiseUrl(siteInput.value.trim());
-        if (!isValidURL(siteValue)) {
+        if (!isValidURL(siteValue) && !isWildcard(siteValue)) {
             alert('Please enter a valid URL');
             return
         }
@@ -59,7 +28,7 @@ document.getElementById('settings-form').addEventListener('submit', function (e)
     // Validate the input (you can add more validation as` needed)
 
 
-    if(isNaN(delayValue) || delayValue < 1){
+    if(isNaN(delayValue) || delayValue < 5){
         alert('Please enter a valid delay');
         return;
     }
@@ -96,18 +65,16 @@ document.getElementById('settings-form').addEventListener('submit', function (e)
     this.reset();
 });
 
-function checkExtensionPage(siteInput) {
-    return siteInput.value.trim().includes("chrome://extensions") ||
-        siteInput.value.trim().startsWith("chrome-extension://") ||
-        siteInput.value.trim().startsWith("moz-extension://");
-}
 
 // Function to validate a URL
 function isValidURL(url) {
-    const urlPattern = /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/;
-    return urlPattern.test(url);
+  try {
+    new URL(url.includes("://") ? url : "https://" + url);
+    return true;
+  } catch {
+    return false;
+  }
 }
-
 // Function to display the current delayed sites
 function displayDelayedSites() {
     browser.storage.sync.get(['delayedSites'], function(result) {
@@ -213,7 +180,8 @@ function saveMessage() {
 
 function saveSite() {
     const siteInput = document.getElementById('wisdom-site');
-    const site = standardiseUrl(siteInput.value.trim()); // Remove leading/trailing spaces
+    const raw = siteInput.value.trim(); // Remove leading/trailing spaces
+    const site = raw ? (raw.includes('://') ? raw : 'https://' + raw) : '';
 
     // Save the message to storage.sync
     browser.storage.sync.set({ wisdomSite: site }, function() {
